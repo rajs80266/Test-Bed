@@ -1,0 +1,26 @@
+.usercard {
+    border: 1px solid black;
+    border-radius: 10%;
+    padding: 20px;
+    margin: 5px;
+}
+
+.user-big{
+    height: 200px;
+    width: 200px;
+}
+
+.user-bigger {
+    height: 250px;
+    width: 300px;
+}
+
+.user-bigger img{
+    height: 250px;
+    width: 250px;
+}
+
+.icon {
+    height: 30px;
+    width: 30px;
+}

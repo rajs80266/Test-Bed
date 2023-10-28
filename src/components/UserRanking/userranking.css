@@ -1,0 +1,42 @@
+.user-ranking {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .user-ranking h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .user-ranking ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .user-ranking li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-ranking .user-rank {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .user-ranking .user-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .user-ranking .user-name {
+    font-size: 18px;
+  }
+  .user-ranking .profile-image {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px;
+  }
+  

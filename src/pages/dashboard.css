@@ -1,0 +1,117 @@
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .video-card {
+    position: relative;
+  }
+  
+  .video-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .video-card h3 {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .video-modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 15px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .image-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .user-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .scroll-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: black;
+
+  }
+  
+  .scroll-button:focus {
+    outline: none;
+  }
+  
+  /* Style to hide default scrollbar */
+  .image-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* ... (previous CSS) */
+
+.image-list {
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  .user-images {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  
+  .user-image {
+    flex: 0 0 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
