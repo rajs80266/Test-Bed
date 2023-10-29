@@ -148,6 +148,7 @@ const SignupPage = () => {
       message3: formData.message3,
     });
     console.log("Done");
+    window.location = 'http://localhost:3000/login';
   };
 
   const renderStep = () => {
@@ -252,8 +253,8 @@ const SignupPage = () => {
                   </div>
                 ))}
               </div>
-              <button type="submit" disabled={currentQuestion.selected.length != 1} onClick={handleNext}>Next</button>
               <button type="button" onClick={handlePrev}>Previous</button>
+              <button type="submit" disabled={currentQuestion.selected.length != 1} onClick={handleNext}>Next</button>
             </form>
           </div>
         );
@@ -291,8 +292,8 @@ const SignupPage = () => {
                   </div>
                 ))}
               </div>
-              <button type="submit" disabled={currentQuestion.selected.length == 0 || currentQuestion.selected.length > 3} onClick={handleNext}>Next</button>
               <button type="button" onClick={handlePrev}>Previous</button>
+              <button type="submit" disabled={currentQuestion.selected.length == 0 || currentQuestion.selected.length > 3} onClick={handleNext}>Next</button>
             </form>
           </div>
         );
@@ -342,8 +343,8 @@ const SignupPage = () => {
                   ...formData
                 });
               }}><center>Regenerate <span style={{fontSize: 'xx-large'}}>🎲</span></center></div>
-              <button type="submit" disabled={currentQuestion.selected.length != 1} onClick={handleNext}>Next</button>
               <button type="button" onClick={handlePrev}>Previous</button>
+              <button type="submit" disabled={currentQuestion.selected.length != 1} onClick={handleNext}>Next</button>
             </form>
           </div>
         );
@@ -369,8 +370,8 @@ const SignupPage = () => {
                     />
                 </div>
             </div>
-            <button type="submit" onClick={handleNext}>Next</button>
             <button type="button" onClick={handlePrev}>Previous</button>
+            <button type="submit" onClick={handleNext}>Next</button>
           </form>
         </div>
         )
@@ -379,8 +380,8 @@ const SignupPage = () => {
           <div>
             <form onSubmit={handleSubmit}>
               <UserProfile formData={formData} setFormData={setFormData}/>
-              <button type="submit">Submit</button>
               <button type="button" onClick={handlePrev}>Previous</button>
+              <button type="submit">Submit</button>
             </form>
           </div>
         );

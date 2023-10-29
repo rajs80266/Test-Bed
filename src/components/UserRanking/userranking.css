@@ -34,9 +34,24 @@
     font-size: 18px;
   }
   .user-ranking .profile-image {
-    width: 50px; /* Adjust the width as needed */
-    height: 50px; /* Adjust the height as needed */
-    border-radius: 50%; /* Make it circular */
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%;
     margin-right: 10px;
+  }
+  
+
+  .rank-user {
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+  
+  .rank-enter {
+    transform: translateY(-100%);
+  }
+  
+  .rank-enter-active {
+    transform: translateY(0);
+    transition: transform 0.5s ease;
   }
   

@@ -115,3 +115,11 @@
     object-fit: cover;
   }
   
+.user-profile-navigator {
+  cursor: pointer;
+  display: flex;
+}
+
+.user-profile-navigator > :nth-child(1) {
+  width: 300px;;
+}

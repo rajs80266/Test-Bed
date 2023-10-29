@@ -10,9 +10,10 @@ export const get = query({
     },
 });
 
-export const getUser = query({
+export const createUser = mutation({
   args: { 'uname': v.string(), 'pswd': v.string() },
-  handler: async (ctx) => {
-    return await ctx.db.query(table).collect();
+  handler: async (ctx, args) => {
+    const taskId = await ctx.db.insert(table, { ...args });
+    return taskId;
   },
 });

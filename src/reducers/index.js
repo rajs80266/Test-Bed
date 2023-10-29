@@ -1,3 +1,12 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({ });
+const UserReducer = (user = {}, action) => {
+    if (action.type === 'SET_USER') {
+      return action.payload;
+    }
+    return user;
+  };
+
+export default combineReducers({
+    user: UserReducer,
+});

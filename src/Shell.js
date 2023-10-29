@@ -2,36 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './shell.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import { useState } from 'react';
 import Suggestor from './pages/suggestor';
 import UserRanking from './components/UserRanking';
 
 const Shell = (props) => {
-    const { children } = props;
+    const { children, user  } = props;
     const [component, setComponent] = useState();
 
     const closeModal = () => {
         setComponent();
     }
+    const {setOpen, setNewUser} = props;
 
     return (
         <div className='shell'>
-            {/* <div className="shell-header">
-                <Header/>
-            </div> */}
-            {window.location !== 'http://localhost:3000/'
-            && window.location !== 'http://localhost:3000/login'
-            && window.location !== 'http://localhost:3000/signup/'
-            ? (
+            {!['/', '/login', '/signup'].includes(window.location.pathname) && 
                 <div className="shell-navigator">
                     <div className='additional-features'>
+                        <button onClick={() => {window.location ='http://localhost:3000/dashboard'}}>Dashboard</button>
                         <button onClick={() => {setComponent(<Suggestor />);}}>Suggest Artist / Producer</button>
                         <button onClick={() => {setComponent(<UserRanking />);}}>Producer Rankings</button>
                         <button>Application</button>
                     </div>
-                </div>):null
+                </div>
             }
             <div className="shell-content">
                 {children}
@@ -53,6 +47,8 @@ const Shell = (props) => {
 
 Shell.propTypes = {
     children: PropTypes.node.isRequired,
+    setNewUser: PropTypes.func.isRequired,
+    setUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -60,5 +56,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(
-    mapStateToProps,
+  mapStateToProps,
 )(Shell);

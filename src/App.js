@@ -35,7 +35,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/profile"
+            path="/profile/:uid"
             render={() => <Profile />}
           />
         </Switch>

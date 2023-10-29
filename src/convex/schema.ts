@@ -24,11 +24,16 @@ export default defineSchema({
     q2: v.string(),
     q3: v.string(),
   }),
+  voters: defineTable({
+    uid: v.string(),
+    last_vote: v.string(),
+    vote_count: v.float64()
+  }),
   votes: defineTable({
     uid: v.string(),
     last_vote: v.string(),
-    vote_count: v.float64(),
-  }),
+    vote_count: v.float64()
+  }).index("by_votes", ["vote_count"]),
   media: defineTable({
     uid: v.string(),
     media_url: v.string(),

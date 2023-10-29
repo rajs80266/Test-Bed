@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import './login.css';
 import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
+import { connect } from 'react-redux';
+import { setUser } from '../actions';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const users = useQuery(api.user.get);
 
   const [formData, setFormData] = useState({
@@ -23,6 +25,7 @@ const LoginPage = () => {
     e.preventDefault();
     users.map(user => {
       if(user.uname === formData.username && user.pswd === formData.password) {
+        props.setUser({username: formData.username});
         window.location = 'http://localhost:3000/dashboard';
       }
     })
@@ -65,4 +68,13 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+const mapStateToProps = (state) => {
+    return state;
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    setUser,
+  },
+)(LoginPage);

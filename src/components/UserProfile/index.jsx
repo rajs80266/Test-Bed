@@ -8,7 +8,6 @@ import './userprofile.css';
 const convexSiteUrl = "https://aware-grouse-298.convex.site";
 
 const UserProfile = ({ formData, setFormData }) => {
-  console.log(setFormData);
   const generateUploadUrl = useMutation(api.display_profile.generateUploadUrl);
   const sendImage = useMutation(api.display_profile.sendImage);
 
