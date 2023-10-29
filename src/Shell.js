@@ -18,16 +18,21 @@ const Shell = (props) => {
 
     return (
         <div className='shell'>
-            <div className="shell-header">
+            {/* <div className="shell-header">
                 <Header/>
-            </div>
-            <div className="shell-navigator">
-                <div className='additional-features'>
-                    <button onClick={() => {setComponent(<Suggestor />);}}>Suggest Artist / Producer</button>
-                    <button onClick={() => {setComponent(<UserRanking />);}}>Producer Rankings</button>
-                    <button>Application</button>
-                </div>
-            </div>
+            </div> */}
+            {window.location !== 'http://localhost:3000/'
+            && window.location !== 'http://localhost:3000/login'
+            && window.location !== 'http://localhost:3000/signup/'
+            ? (
+                <div className="shell-navigator">
+                    <div className='additional-features'>
+                        <button onClick={() => {setComponent(<Suggestor />);}}>Suggest Artist / Producer</button>
+                        <button onClick={() => {setComponent(<UserRanking />);}}>Producer Rankings</button>
+                        <button>Application</button>
+                    </div>
+                </div>):null
+            }
             <div className="shell-content">
                 {children}
             </div>

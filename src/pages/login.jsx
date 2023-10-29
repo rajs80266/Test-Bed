@@ -1,8 +1,12 @@
 // LoginPage.jsx
 import React, { useState } from 'react';
 import './login.css';
+import { useQuery } from "convex/react";
+import { api } from "../convex/_generated/api";
 
 const LoginPage = () => {
+  const users = useQuery(api.user.get);
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -15,17 +19,21 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
+    users.map(user => {
+      if(user.uname === formData.username && user.pswd === formData.password) {
+        window.location = 'http://localhost:3000/dashboard';
+      }
+    })
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{width: '20%'}}>
       <h2>Login</h2>
+      <br/>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
           <input
             type="text"
             id="username"
@@ -33,10 +41,10 @@ const LoginPage = () => {
             value={formData.username}
             onChange={handleChange}
             required
+            placeholder='Username'
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -44,9 +52,14 @@ const LoginPage = () => {
             value={formData.password}
             onChange={handleChange}
             required
+            placeholder='Password'
           />
         </div>
+        <br/>
+        <br/>
         <button type="submit">Login</button>
+        <br/>
+        <div>Not a user? Creat New account <a href='http://localhost:3000/signup'>Register</a></div>
       </form>
     </div>
   );

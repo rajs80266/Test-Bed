@@ -1,0 +1,23 @@
+.star1 {
+    position: absolute;
+    height: 690px;
+    right: 1220px;
+    top: -225px;
+    z-index: -1;
+}
+
+.star2 {
+    position: absolute;
+    top: -320px;
+    height: 550px;
+    right: -235px;
+    z-index: -1;
+}
+
+.hi {
+    position: absolute;
+    top: 350px;
+    height: 200px;
+    right: 15px;
+    z-index: -1;
+}

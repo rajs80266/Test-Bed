@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import './signup.css';
 
+import { useMutation } from "convex/react";
+import { api } from "../convex/_generated/api";
+import UserProfile from '../components/UserProfile';
+
 const SignupPage = () => {
+  const createUser = useMutation(api.user.createUser);
+  const createVote = useMutation(api.votes.createVote);
+  const createPreferences = useMutation(api.preferences.createPreferences);
+  const createPersonnelDetails = useMutation(api.personnel_details.createPersonnelDetails);
   const [formData, setFormData] = useState({
     step: 1,
     name: '',
@@ -68,7 +76,7 @@ const SignupPage = () => {
       if (formData.questions[0].selected == 'Just exploring...') {
         setFormData({
           ...formData,
-          step: 6
+          step: 7
         });
         return;
       }
@@ -102,7 +110,7 @@ const SignupPage = () => {
 
   const handlePrev = (e) => {
     e.preventDefault();
-    if (formData.step == 6) {
+    if (formData.step == 7) {
       if (formData.questions[0].selected == 'Just exploring...') {
         setFormData({
           ...formData,
@@ -117,9 +125,29 @@ const SignupPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    const uid = await createUser({'uname': formData.username, 'pswd': formData.password});
+    await createVote({'uid': uid, 'last_vote': '-', vote_count: 0});
+    await createPreferences({
+      uid,
+      type: formData.questions[0].selected[0],
+      q1: formData.questions[1].selected.join(' '),
+      q2: formData.questions[2].selected.join(' '),
+      q3: formData.questions[3].selected.join(' '),
+    });
+    await createPersonnelDetails({
+      uid,
+      name: formData.name,
+      email: formData.email,
+      display_profile: formData.image,
+      social: formData.social,
+      instruction: formData.instruction,
+      message1: formData.message1,
+      message2: formData.message2,
+      message3: formData.message3,
+    });
+    console.log("Done");
   };
 
   const renderStep = () => {
@@ -130,7 +158,6 @@ const SignupPage = () => {
           <div>
             <form onSubmit={handleNext}>
             <div className="form-group">
-                <label htmlFor="name">Full Name</label>
                 <input
                   type="text"
                   id="name"
@@ -138,10 +165,10 @@ const SignupPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  placeholder='Full Name'
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -149,10 +176,10 @@ const SignupPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  placeholder='Email'
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="name">Username</label>
                 <input
                   type="text"
                   id="username"
@@ -160,10 +187,10 @@ const SignupPage = () => {
                   value={formData.username}
                   onChange={handleChange}
                   required
+                  placeholder='Username'
                 />
               </div>              
               <div className="form-group">
-                <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   id="password"
@@ -171,21 +198,24 @@ const SignupPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
+                  placeholder='Password'
                 />
               </div>              
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
-                  type="confirmPassword"
+                  type="password"
                   id="confirmPassword"
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
+                  placeholder='Confirm Password'
                 />
               </div>
               <button type="submit">Next</button>
             </form>
+            <br/>
+            <div>Already have an account? <a href='http://localhost:3000/login'>Login</a></div>
           </div>
           
         );
@@ -317,11 +347,39 @@ const SignupPage = () => {
             </form>
           </div>
         );
-        case 6:
+      case 6:
+        return (<div>
+          <form onSubmit={handleNext}>
+            <div>
+              <h3>Submit a video of you 👀creatively✨ introducing yourself!</h3>
+              <div>
+                *Make sure to show one (singing, dancing, acting, etc.) of your talent,
+                Your future fans will see this:)
+              </div>
+              
+              <div className="form-group">
+                    <input
+                        type="text"
+                        id="youtube"
+                        name="youtube"
+                        value={formData.youtube}
+                        onChange={handleChange}
+                        required
+                        placeholder='Intro Video'
+                    />
+                </div>
+            </div>
+            <button type="submit" onClick={handleNext}>Next</button>
+            <button type="button" onClick={handlePrev}>Previous</button>
+          </form>
+        </div>
+        )
+      case 7:
         return (
           <div>
             <form onSubmit={handleSubmit}>
-              <button type="submit">Register</button>
+              <UserProfile formData={formData} setFormData={setFormData}/>
+              <button type="submit">Submit</button>
               <button type="button" onClick={handlePrev}>Previous</button>
             </form>
           </div>
@@ -335,6 +393,7 @@ const SignupPage = () => {
     <div>
         <div className="login-container">
           <h2>Signup</h2>
+          <br/>
           {renderStep()}
         </div>
     </div>
